@@ -32,6 +32,14 @@ echo preseed.cfg | cpio -H newc -o -A -F ${ISOFILES}/install.amd/initrd
 gzip ${ISOFILES}/install.amd/initrd
 chmod -w -R ${ISOFILES}/install.amd/
 
+echo "*** Updating boot arguments"
+#cp preseed.cfg ${ISOFILES}
+#sed -e 's/initrd.gz/initrd.gz file=\/cdrom\/preseed.cfg/' \
+#  -i ${ISOFILES}/isolinux/txt.cfg
+sed -e 's/default vesamenu.c32/default install/' \
+  -e 's/timeout 0/timeout 10/' \
+  -i ${ISOFILES}/isolinux/isolinux.cfg
+
 (
   cd ${ISOFILES}
   md5sum $(find -follow -type f) >md5sum.txt
