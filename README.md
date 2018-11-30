@@ -23,3 +23,12 @@ docker run -it --rm -v "$PWD":/work debian-update-preseed-iso:latest debian-9.6.
   This will generate `preseed-debian-9.6.0-amd64-netinst.iso`.
 
 1. Make the ISO availabe to the machine you want to install: burn a disk, copy the image to a USB stick, etc.
+
+
+## Customizing The Install
+
+The update command will add `preseed.cfg` from the main directory, and all files in the `initrd` directory to the initrd image.
+
+As an example, there are three scripts in the `initrd/custom` directory that are called from `preseed.cfg` at various points during the installation. This allows you to fully customize the install.
+
+When adding files to `initrd`, make sure you pick names that do not conflict with regular initrd image contents.
